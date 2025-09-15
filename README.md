@@ -1,5 +1,15 @@
-# MPV Quality-of-Life Script Collection
 
+
+<div align="center">
+  <h1>MPV Quality-of-Life Script Collection</h1>
+  <img src="https://img.shields.io/badge/🪟%20Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows" />
+  <img src="https://img.shields.io/badge/%20MPV-663399?style=for-the-badge&logo=mpv&logoColor=white" alt="MPV" />
+  <img src="https://img.shields.io/badge/%20Lua-2C2D72?style=for-the-badge&logo=lua&logoColor=white" alt="Lua" />
+  <img src="https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge" alt="License: GPL v3" />
+  <img src="https://img.shields.io/badge/Maintained-Yes-green.svg?style=for-the-badge" alt="Maintained: Yes" />
+</div>
+  </br>
+  
 This is a collection of powerful, high-quality Lua scripts designed to enhance and automate the MPV player. While originally developed for the [Stremio Kai](https://github.com/allecsc/Stremio-Kai) project, these scripts are fully standalone, general-purpose, and built to be universally useful for any type of content.
 
 The philosophy behind these scripts is to provide a polished, "it just works" experience out of the box, while still offering deep configuration options for power-users. Every script is designed to be highly adjustable to your specific needs and viewing habits.
