@@ -20,7 +20,7 @@ If you need any assistance tailoring a script for your unique setup, please open
 
 # 🔔 Notify Skip
 
-Binge-watch like a pro. This script provides a configurable, Netflix-style system for skipping intros, outros, and previews, with a multi-layered detection system that uses chapter titles, positions, and even silence to know when to offer a skip.  
+Binge-watch like a pro. This script provides a configurable, Netflix-style system for skipping intros, outros, and previews, with a multi-layered detection system that uses chapter titles, positions, and even silence to know when to offer a skip.
 
 <details>
 <summary><strong>Find out how it works!</strong></summary>
@@ -132,6 +132,11 @@ However, it proudly stands on the shoulders of the original scripts, and full cr
 ## **🎉 The Bottom Line**
 Go right to your favorite part! This script provides a polished, pop-up notification that gives you precise, one-press control to skip content exactly when you want. It’s a quality-of-life upgrade that makes your player feel less like a tool and more like a premium service.
 </details>
+
+<div align="center">
+<img width="730" alt="Screenshot 2025-09-15 143608" src="https://github.com/user-attachments/assets/77f60d4a-2eed-4353-a28a-71b7ba31a6b9" />
+</div>
+
 </br>
 
 # 🎯 Smart Subtitle Selector
