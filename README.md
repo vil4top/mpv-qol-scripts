@@ -241,7 +241,7 @@ It's the set-it-and-forget-it system that finally makes your carefully tuned pro
 
 ### 🤔 How It Thinks (The Decision Tree)
 
-This script's sole purpose is to analyze the video file and apply the appropriate profile from the [**Visually Stunning Predefined Profiles**](#-visually-stunning-predefined-profiles) table. It uses a powerful, two-tiered system to identify content with high accuracy and runs a lightning-fast check on every file, asking a series of questions to determine its exact nature and apply the perfect profile:
+This script's sole purpose is to analyze the video file and apply the appropriate profile from the [**Visually Stunning Predefined Profiles**](https://github.com/allecsc/Stremio-Kai/tree/main?tab=readme-ov-file#-visually-stunning-predefined-profiles) table. It uses a powerful, two-tiered system to identify content with high accuracy and runs a lightning-fast check on every file, asking a series of questions to determine its exact nature and apply the perfect profile:
 
 1. **Tier 1: High-Confidence "Fingerprint" Check**
   * First, it scans for metadata "fingerprints" that are strong indicators of anime. This includes things like:
@@ -265,7 +265,7 @@ If a file matches neither tier, it receives the standard `sdr` or `hdr` profile.
 
 This script is the "brain" of a profile system, but it is not the profiles themselves. The script's logic is designed to apply profile names (e.g., [anime-hdr], [general]) that must exist in your mpv.conf file.
 
-  - **For Standalone Use:** It is highly recommended to use the provided mpv.conf from the [Stremio Kai](https://github.com/allecsc/Stremio-Kai) project as a starting point. This file contains all the necessary profiles that this script is pre-configured to look for.
+  - **For Standalone Use:** It is highly recommended to use the provided [mpv.conf](https://github.com/allecsc/Stremio-Kai/blob/main/portable_config/mpv.conf) from the [Stremio Kai](https://github.com/allecsc/Stremio-Kai) project as a starting point. This file contains all the necessary profiles that this script is pre-configured to look for.
 
   - **For Advanced Users:** If you have your own extensive mpv.conf, you can adapt the script to your needs. You will need to edit the profile-manager.lua file and change the profile names inside the script's logic to match the names you use in your personal configuration.
 
