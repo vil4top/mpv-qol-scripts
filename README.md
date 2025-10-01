@@ -69,7 +69,10 @@ Chapters found:
 ```
 📁 portable_config/
 ├── 📁 scripts/
-│   └── 📄 notify_skip.lua
+│   └── 📁 notify_skip/
+│       ├── 📄 main.lua
+│       ├── 📁 lib/
+│       └── 📁 elements/
 └── 📁 script-opts/
     └── 📄 notify_skip.conf
 ```
@@ -79,36 +82,38 @@ Chapters found:
 The script's behavior is controlled via `notify_skip.conf`. These settings are read directly from the script's code:
 
 ```ini
-opening_patterns=OP|Opening|Intro
-ending_patterns=ED|Ending|Outro
-preview_patterns=Preview|Coming Up
+# Categories of chapters to look for, separated by semicolons.
+skip_categories=opening;ending;preview;recap
+
+# Use the most flexible "contains" patterns instead of the script's defaults.
+# Use ^OP or ^ED to match the exact word "OP" or "ED" at the start of the title.
+# Use OP$ or ED$ to match the exact word "OP" or "ED" at the end of the title.
+opening_patterns=OP|Opening|Intro|Introduction|Theme|Song|Main Theme|Title|Open|Teaser
+ending_patterns=ED|Ending|Outro|End|Credits|Closing|Epilogue
+preview_patterns=Preview|Coming Up|Next|Trailer
+recap_patterns=Recap|Previously|Last Time|Summary|Story So Far
 
 # Auto-skip detected intro/outro chapters
 auto_skip=no
 
+# Minimum duration to consider as valid skip exit (seconds)
+min_skip_duration=10
+
 # Maximum duration for skippable chapters (seconds)
-# Chapters longer than this will never be marked as skippable
-max_skip_duration=200
-
-# Set the time limit for untitled Chapter 1 to 4 minutes (240 seconds)
-max_intro_chapter_duration=240
-
-# Time window for manual skip (seconds)
-# Allow skip when skippable chapter starts within this time
-skip_window=3
-
-# Silence detection settings (for files without chapters)
-# Maximum noise level in dB to consider as silence
-quietness=-30
-
-# Minimum silence duration in seconds to trigger skip
-silence_duration=0.5
+# Chapters outside these windows will not trigger notifications
+intro_time_window=200     # Skip notifications are shown ONLY during the first 200 seconds (3 minutes 20 seconds)
+outro_time_window=300     # Skip notifications are shown ONLY during the last 300 seconds (5 minutes)
 
 # Show OSD notification when skippable content is detected
 show_notification=yes
 
 # Duration to show notification in seconds
-notification_duration=30
+# Default: 30 seconds
+notification_duration=15
+
+# Duration to show notification in seconds, for black frame / silence detection method (Lower Accuracy)
+# Default: 5 seconds -> False positives chance, so lower screen time
+filters_notification_duration=15
 ```
 
 ## 🔧 Troubleshooting
@@ -118,7 +123,7 @@ notification_duration=30
       * Check the MPV console (`~` key) for any error messages.
       * The video file may not contain any chapters or silent periods for the script to detect.
   * **If it tries to skip the whole episode:**
-      * This is prevented by the `max_skip_duration=200` safety feature in the script, which stops it from ever skipping more than approximately 3 minutes.
+      * This is prevented by the `intro_time_window=200` and `outro_time_window=300` safety feature in the script, which stops it from ever skipping more than approximately 3 minutes.
 
 ### 🙏 Origins & Acknowledgements
 
@@ -128,6 +133,7 @@ However, it proudly stands on the shoulders of the original scripts, and full cr
 
 * **[po5/chapterskip](https://github.com/po5/chapterskip)**
 * **[rui-ddc/skip-intro](https://github.com/rui-ddc/skip-intro)**
+* **[tomasklaen/uosc](https://github.com/tomasklaen/uosc)**
 
 ## **🎉 The Bottom Line**
 Go right to your favorite part! This script provides a polished, pop-up notification that gives you precise, one-press control to skip content exactly when you want. It’s a quality-of-life upgrade that makes your player feel less like a tool and more like a premium service.
@@ -135,6 +141,44 @@ Go right to your favorite part! This script provides a polished, pop-up notifica
 
 <div align="center">
 <img width="730" alt="Screenshot 2025-09-15 143608" src="https://github.com/user-attachments/assets/77f60d4a-2eed-4353-a28a-71b7ba31a6b9" />
+</div>
+
+## ☑️ BIG UPDATE 
+
+- **2 Versions**
+  - **notify_skip** -> Simple notification, skip is triggered by **pressing Tab**
+  - **notify_skip_click** -> Interactive button, skip is triggered by **clicking the notification** or by **pressing Tab**. _Will conflict with UOSC since it's built on it._
+- Parallel detection system with silence detection and black frame detection
+- Improved notification detection
+- Less false positives
+- Should work with most media now, not just anime. _Not fully tested yet_
+
+<details>
+<summary><strong>📄 Complete Changelog</strong></summary>
+
+- **Button Infrastructure Integration**: Added a complete button rendering system with globals like `config`, `options`, `fg`, `bg`, `display`, and `button_state` for interactive UI elements, including a `SkipNotificationButton` class for user interactions.
+- **Enhanced State Management**: Introduced a more structured `state` object with sub-objects for `detection`, `ui`, `observers`, and `cache`, replacing the simpler state variables in the old version.
+- **Improved Chapter Detection**: Enhanced `find_skip_chapters()` to prioritize titled chapters over positional ones, with better pattern matching for categories like opening, ending, preview, and recap, and added duration/time window checks.
+- **Dual Detection Mode**: Streamlined to a two-mode system ("chapter" or "silence"), with improved fallback logic where silence detection only activates if no black frame detection occurs.
+- **Minimum Skip Duration**: Added `min_skip_duration` option (default 10 seconds) to prevent skipping very short segments, ensuring meaningful skips.
+- **Intro Skip Blocking**: Implemented `intro_skipped` flag to prevent repeated intro notifications after a substantial skip, with reset logic when entering outro windows or seeking back.
+- **Skip Suppression Mechanism**: Added `start_skip_suppression()` with a 5-second timer to prevent spam notifications after user interactions or seeks.
+- **Enhanced Filter Management**: Improved filter initialization and state management for `blackdetect` and `silencedetect`, with separate notification and skipping filters.
+- **Better Event Parsing**: Fixed and improved parsing of filter metadata events in `skip_detection_trigger()` for more reliable black frame and silence detection.
+- **UI Improvements**: Replaced ASS overlays with interactive buttons via `SkipNotificationButton`, including persistent display options and better message handling.
+- **Notification Logic Refinement**: Updated notification triggers to respect suppression timers and intro skip status, with time-window-based message determination ("Skip Opening" vs "Skip Ending").
+- **Seek Handling**: Enhanced `on_seek()` to reset `intro_skipped` when seeking back to the beginning, allowing re-enabling of intro notifications.
+- **Setup and Initialization**: Added delayed setup (`finalize_setup()`) with 3.5-second timeout to ensure compatibility with other scripts, and improved mode detection based on chapter availability.
+- **Performance Optimizations**: Added render loop management with `request_render()` and display dimension updates for efficient UI rendering.
+- **Configuration Options**: Expanded options including `min_skip_duration`, refined detection parameters, and better pattern strings for chapter categories.
+- **Logging and Debugging**: Enhanced logging throughout for better troubleshooting, including debug messages for skip durations and detection events.
+- **Error Handling**: Improved robustness in functions like `skip_to_chapter_end()` to prevent looping at video end.
+- **Code Cleanup**: Removed redundant code, improved variable naming, and added comments for clarity, making the codebase more professional and easier to understand.
+</details>
+
+<div align="center">
+<p><h3>✨ New UI Notification ✨</h3></p>
+<img width="322" alt="new_notification" src="https://github.com/user-attachments/assets/07253eef-8533-426a-87f5-87688c895275" />
 </div>
 
 </br>
